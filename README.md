@@ -8,8 +8,10 @@ producing, consuming 하는 메세지를 적절히 파싱해야 합니다.
 이에 서로 다른 서비스를 개발하는 입장에서\
 다른 서비스에서 프로듀싱 하는 데이터의 형태를 맞춰주어야 메세지소비가 가능해집니다.
 
-이에 `kafka`에 대한 획일화된 디렉토리를 통해
-다른 서비스 개발자의 dto 를 명확하게 확인하고 개발의 편의성을 높히고자 합니다.\
+이에 `kafka`에 대한 획일화된 디렉토리를 통해\
+다른 서비스 개발자의 dto 를 명확하게 확인하고 개발의 편의성을 높히고자 합니다.
+
+<br>
 
 # 🔥 프로젝트 구성
 ```markdown
@@ -31,6 +33,8 @@ com.gorae-user-service
             └── dto
 ```
 
+<br>
+
 # 🔥 디렉토리 구성 방식
 
 ```
@@ -44,11 +48,14 @@ com.gorae-user-service
 이를 구분짓기 위해 기본적으로 각각의 디렉토리를 생성합니다.\
 `consumer` 디렉토리, `producer` 디렉토리 순서대로 설명을 작성해두겠습니다.
 
+<br>
+
 ## 💠 `consumer`
 ### `consumer.alim or post.dto`
 메세지를 소비하는 주체가 `user`가 된 경우입니다.\
 이 경우 `post` , `alim` 서비스에서 발행되는 메세지를 구독하고 있는 상황에서\
 각각의 메세지를 소비하기 위해 `dto` 디렉토리를 작성합니다.
+
 
 ### `consumer.alim or post.service`
 `producer`와 다르게 `service` 디렉토리가 존재합니다.\
@@ -56,16 +63,21 @@ com.gorae-user-service
 `user` 서비스만의 서비스로직을 작성해두는 코드입니다.\
 `producing`하는 서비스를 개발하는 개발자가 함께 확인하기 용의하도록 따로 작성합니다.
 
+<br>
+
 ## 💠 `producer`
 ### `producer.alim or post.dto`
 메세지를 발행하는 주체가 `user`가 된 경우입니다.\
 이 경우 `post`, `alim` 서비스가 구독하고 있는 토픽에 발행하는 메세지의 `dto`를 작성합니다.\
+
 
 ### `producer` service 는 왜 없나요?
 `producer` 로서의 `user` 서비스는 본인의 메인 로직을 처리하고\
 메세지 발행하는 행위에서 추가적인 서비스 로직을 수행하지 않습니다.\
 이에 따로 kafka 메세지 발행을 위한 service 는 필요로 하지 않습니다.\
 (cf) 늘 했던것 처럼 kafka 와 같은 레벨로서 controller, service 디렉토리에 구성해주시면 됩니다.
+
+<br>
 
 ## 💠 DTO Class name
 `DTO` 클래스의 이름은\
@@ -76,6 +88,8 @@ public class UserInfoEvent {
     
 }
 ```
+
+<br>
 
 # 🔥 yaml 파일 프로퍼티
 
